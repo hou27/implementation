@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append("/Users/hou27/workspace/ml/with_numpy")
+
 import numpy as np
 from activation.softmax import softmax
 from activation.tanh import tanh

@@ -1,5 +1,8 @@
-import numpy as np
+import sys
 
+sys.path.append("/Users/hou27/workspace/ml/with_numpy")
+
+import numpy as np
 from activation.tanh import d_tanh
 
 # Backward pass for a vanilla RNN cell.
