@@ -29,15 +29,15 @@ def backward_pass(inputs, outputs, hidden_states, targets, params):
         # Backpropagate into output (derivative of cross-entropy)
         # http://cs231n.github.io/neural-networks-case-study/#grad
         d_y_t = outputs[t].copy()
-        # d_y_t[np.argmax(targets[t])] -= 1
+        d_y_t[np.argmax(targets)] -= 1
         
         # Backpropagate into d_hy
-        d_hy += np.dot(d_y_t, hidden_states[t])
+        d_hy += np.dot(d_y_t, hidden_states[t].T)
         d_b_out += d_y_t
         
         # Backpropagate into h_t
         # hidden node의 gradient는 이전 hidden node의 gradient와 현재 output의 gradient의 합으로 계산
-        d_h_t = np.dot(W_hy, d_y_t) + d_h_next
+        d_h_t = np.dot(W_hy.T, d_y_t) + d_h_next
         
         # Backpropagate through non-linearity
         # 흘러들어온 gradient에 대해 tanh의 미분값을 곱해줌
@@ -45,11 +45,11 @@ def backward_pass(inputs, outputs, hidden_states, targets, params):
         d_b_hidden += d_h_raw
         
         # Backpropagate into W_xh
-        d_xh += np.dot(d_h_raw, inputs[t])
+        d_xh += np.dot(d_h_raw, inputs[t].T)
         
         # Backpropagate into W_hh
-        d_hh += np.dot(d_h_raw, hidden_states[t-1])
-        d_h_next = np.dot(W_hh, d_h_raw) # 다음 hidden node의 gradient를 계산하기 위해 저장
+        d_hh += np.dot(d_h_raw, hidden_states[t-1].T)
+        d_h_next = np.dot(W_hh.T, d_h_raw) # 다음 hidden node의 gradient를 계산하기 위해 저장
     
     # Pack gradients
     grads = d_xh, d_hh, d_hy, d_b_hidden, d_b_out
