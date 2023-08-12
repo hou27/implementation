@@ -85,9 +85,7 @@ if __name__ == "__main__":
     hidden_state = np.zeros((hidden_size, 1))
 
     # Forward pass
-    outputs, hidden_states, actual_values = forward_pass(
-        inputs, hidden_state, params, print_values=True
-    )
+    outputs, hidden_states, actual_values = forward_pass(inputs, hidden_state, params)
 
     print("Input :")
     print(inputs)
