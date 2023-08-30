@@ -3,7 +3,6 @@ import sys
 sys.path.append("/Users/hou27/workspace/ml/with_numpy")
 
 import numpy as np
-from activation.softmax import softmax
 from activation.tanh import tanh
 
 
@@ -20,8 +19,6 @@ def forward_pass(inputs, hidden_state, params):
 
     # outputs, hidden_states 초기화
     outputs, hidden_states = [], []
-    # actual_values 초기화
-    actual_values = []
 
     # For each element in input sequence
     for t in range(len(inputs)):
@@ -31,13 +28,10 @@ def forward_pass(inputs, hidden_state, params):
         )
 
         # output 계산
-        values = np.dot(W_hy, hidden_state) + b_out
-        # out = softmax(np.dot(W_hy, hidden_state) + b_out)
-        out = softmax(values)
+        out = np.dot(W_hy, hidden_state) + b_out
 
         # 저장
         outputs.append(out)
-        actual_values.append(values)
         hidden_states.append(hidden_state.copy())
 
-    return outputs, hidden_states, actual_values
+    return outputs, hidden_states
