@@ -27,17 +27,19 @@ def backward_pass(inputs, outputs, hidden_states, targets, params):
         loss += np.sqrt(np.mean(np.square(outputs[t] - targets[t])))
 
         # Backpropagate into output
-        d_y_t = outputs[t] - targets[t]
+        d_y_t = outputs[t] - targets[t]  # = 손실함수 RMSE를 출력 오차(y_pred - y_true)로 미분한 값
 
-        # Backpropagate into d_hy
-        d_hy += d_y_t * hidden_states[t]
+        # 현재 타임스텝에서의 출력 오차(d_y_t)와 hidden state 값을 곱하여 W_hy에 대한 gradient의 계산
+        d_hy += (
+            d_y_t * hidden_states[t]
+        )  # (출력 y = W_hy * h + b를 W_hy에 대해 미분한 값) X (d_y_t)
         d_b_out += d_y_t
 
         # Backpropagate into h_t
         # hidden node의 gradient는 이전 hidden node의 gradient와 현재 output의 gradient의 합으로 계산
         d_h_t = np.dot(W_hy.T, d_y_t) + d_h_next
 
-        # Backpropagate through non-linearity
+        # Backpropagate (비선형인 점 주의)
         # 흘러들어온 gradient에 대해 tanh의 미분값을 곱해줌
         d_h_raw = d_tanh(hidden_states[t]) * d_h_t
         d_b_hidden += d_h_raw
