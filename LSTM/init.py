@@ -2,8 +2,8 @@ import numpy as np
 
 
 # Initializes our LSTM network.
-def init_lstm(input_size, hidden_size):
-    input_size = input_size
+def init_lstm(hidden_size, vocab_size):
+    input_size = vocab_size
     hidden_size = hidden_size
 
     # Forget gate weight and bias
