@@ -21,7 +21,7 @@ if __name__ == "__main__":
     )
     y = np.array([[6.0], [7.0], [8.0], [9.0], [10.0]])
 
-    num_epochs = 1000
+    num_epochs = 30
     learning_rate = 3e-4
 
     # 네트워크 초기화
@@ -41,8 +41,10 @@ if __name__ == "__main__":
 
         # inputs = X
         # targets = y
-        inputs = np.array([1, 2, 3, 4])
-        targets = np.array([2, 3, 4, 5])
+        # inputs = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        # targets = np.array([2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+        inputs = np.array([0.1, 0.2, 0.3, 0.4, 0.5])
+        targets = np.array([0.2, 0.3, 0.4, 0.5, 0.6])
 
         # 매 epoch마다 hidden state를 0으로 초기화
         hidden_state = np.zeros_like(hidden_state)
@@ -65,12 +67,14 @@ if __name__ == "__main__":
         # Loss 출력
         print(f"Epoch {i}, training loss: {training_loss[-1]}")
 
-    inputs = np.array(
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-    )
-    targets = np.array(
-        [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
-    )
+    # inputs = np.array(
+    #     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    # )
+    # targets = np.array(
+    #     [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
+    # )
+    inputs = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
+    targets = np.array([0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
 
     # hidden_state = np.zeros((hidden_size, 1))
     hidden_state = np.zeros((1))
